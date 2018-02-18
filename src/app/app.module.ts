@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import {IonicApp, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,6 +36,8 @@ import { TabsPage } from "../pages/tabs/tabs";
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { BurstPage } from '../pages/burst/burst';
+import { CryptoGuruService } from '../services/crypto-guru-service';
 
 //end import firebase
 
@@ -66,10 +69,12 @@ export const firebaseConfig = {
     AboutPage,
     HomePage,
     TabsPage,
+    BurstPage
     /* import pages */
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
@@ -93,6 +98,7 @@ export const firebaseConfig = {
     AboutPage,
     HomePage,
     TabsPage,
+    BurstPage
     /* import pages */
   ],
   providers: [
@@ -103,7 +109,8 @@ export const firebaseConfig = {
     ChatService,
     NotificationService,
     AngularFireDatabase,
-    AuthService
+    AuthService,
+    CryptoGuruService
     /* import services */
   ]
 })

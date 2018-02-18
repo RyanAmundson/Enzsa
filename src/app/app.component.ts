@@ -13,6 +13,7 @@ import {ChatsPage} from '../pages/chats/chats';
 import {NotificationsPage} from '../pages/notifications/notifications';
 import {ContactPage} from '../pages/contact/contact';
 import {SettingsPage} from '../pages/settings/settings';
+import { BurstPage } from '../pages/burst/burst';
 // end import pages
 
 @Component({
@@ -34,7 +35,12 @@ export class MyApp {
       count: 0,
       component: ActivityPage
     },
-
+    {
+      title: 'Burst',
+      icon: 'ios-home-outline',
+      count: 0,
+      component: BurstPage
+    },
     {
       title: 'Post',
       icon: 'ios-list-box-outline',

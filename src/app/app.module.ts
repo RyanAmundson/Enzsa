@@ -52,6 +52,14 @@ export const firebaseConfig = {
 
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
+  ],
   declarations: [
     MyApp,
     WelcomePage,
@@ -70,15 +78,6 @@ export const firebaseConfig = {
     HomePage,
     TabsPage,
     BurstPage
-    /* import pages */
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

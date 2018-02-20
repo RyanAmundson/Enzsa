@@ -14,5 +14,48 @@
 
 
 <ion-content padding>
-    {{burst|json}}
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6>{{bestDeadlineInfo?.deadline | date}}</ion-col>
+            <ion-col col-6>{{elapsedTime(block?.deadline) | date}}</ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-card>
+        <ion-card-header>
+            Height
+        </ion-card-header>
+        <ion-card-content>
+            {{block?.height}}
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Base Target
+        </ion-card-header>
+        <ion-card-content>
+            {{block?.baseTarget}}
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Best Deadline
+        </ion-card-header>
+        <ion-card-content>
+            {{bestDeadlineInfo?.deadline}}
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Best Miner
+        </ion-card-header>
+        <ion-card-content>
+            {{bestDeadlineInfo?.name}}
+        </ion-card-content>
+    </ion-card>
+
+    <ion-list no-lines>
+        <button ion-item *ngFor="let share of currentShares">
+              {{ share.name }} : {{share.val}}
+            </button>
+    </ion-list>
 </ion-content>

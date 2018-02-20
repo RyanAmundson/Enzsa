@@ -5,38 +5,39 @@ import * as Rx from 'rxjs/Rx';
 
 @Injectable()
 export class CryptoGuruService {
-    url = "wss://0-100-pool.burst.cryptoguru.org/ws";
-
+    url = "ws://localhost:8080";
+    socket:WebSocket;
 
     private subject: Rx.Subject<any>;
 
     constructor(){
-        this.connect(this.url);
     }
 
-    public connect(url): Rx.Subject<any> {
+    ngOnDestroy(){
+
+    }
+
+    public connect(): Rx.Subject<any> {
       if (!this.subject) {
-        this.subject = this.create(url);
-        console.log("Successfully connected: " + url);
+        this.subject = this.create(this.url);
+        console.log("Successfully connected: " + this.url);
       } 
       return this.subject;
     }
   
     private create(url): Rx.Subject<any> {
-      let ws = new WebSocket(url);
-  
-      let observable = Rx.Observable.create(
-      (obs: Rx.Observer<any>) => {
-          ws.onmessage = obs.next.bind(obs);
-          ws.onerror = obs.error.bind(obs);
-          ws.onclose = obs.complete.bind(obs);
-          return ws.close.bind(ws);
-      })
+        this.socket = new WebSocket(url);
+
+        let observable = Rx.Observable.create((obs: Rx.Observer<any>) => {
+            this.socket.onmessage = obs.next.bind(obs);
+            this.socket.onerror = obs.error.bind(obs);
+            this.socket.onclose = obs.complete.bind(obs);
+                return this.socket.close.bind(this.socket);
+        })
         let observer = {
           next: (data: Object) => {
-            console.log(data)
-              if (ws.readyState === WebSocket.OPEN) {
-                  ws.send(JSON.stringify(data));
+              if (this.socket.readyState === WebSocket.OPEN) {
+                this.socket.send(JSON.stringify(data));
               }
           }
       }
